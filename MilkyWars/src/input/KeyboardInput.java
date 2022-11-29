@@ -44,7 +44,6 @@ public class KeyboardInput implements KeyListener {
 //			break;
 //		}
 //		case KeyEvent.VK_K: {
-//			System.out.println("Kontol");
 //			break;
 //		}
 		}
