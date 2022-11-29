@@ -40,7 +40,6 @@ public class KeyboardInput implements KeyListener {
 			break;
 		}
 //		case KeyEvent.VK_J: {
-//			System.out.println("Jotnar");
 //			break;
 //		}
 //		case KeyEvent.VK_K: {
