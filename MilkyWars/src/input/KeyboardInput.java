@@ -2,7 +2,6 @@ package input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import main.GamePanel;
 import static util.Constant.Directions.*;
 
@@ -39,12 +38,6 @@ public class KeyboardInput implements KeyListener {
 			gamePanel.setDirection(RIGHT);
 			break;
 		}
-//		case KeyEvent.VK_J: {
-//			break;
-//		}
-//		case KeyEvent.VK_K: {
-//			break;
-//		}
 		}
 	}
 

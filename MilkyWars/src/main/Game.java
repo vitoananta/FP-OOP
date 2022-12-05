@@ -6,6 +6,7 @@ public class Game implements Runnable {
 	private GamePanel gamePanel;
 	private Thread gameThread;
 	private final int TARGET_FPS = 144;
+	private final int TARGET_UPS = 200;
 
 	public Game() {
 		gamePanel = new GamePanel();
@@ -19,29 +20,47 @@ public class Game implements Runnable {
 		gameThread.start();
 	}
 
+	public void update() {
+		gamePanel.updateGame();
+	}
+
 	@Override
 	public void run() {
 
 		double timePerFrame = 1000000000.0 / TARGET_FPS;
-		long lastFrame = System.nanoTime();
-		long now = System.nanoTime();
-
+		double timePerUpdate = 1000000000.0 / TARGET_UPS;
+		long previousTime = System.nanoTime();
 		int frames = 0;
+		int updates = 0;
 		long lastCheck = System.currentTimeMillis();
+		double deltaU = 0;
+		double deltaF = 0;
 
 		while (true) {
 
-			now = System.nanoTime();
-			if (now - lastFrame >= timePerFrame) {
+			long currentTime = System.nanoTime();
+
+			deltaU += (currentTime - previousTime) / timePerUpdate;
+			deltaF += (currentTime - previousTime) / timePerFrame;
+			previousTime = currentTime;
+
+			if (deltaU >= 1) {
+				update();
+				updates++;
+				deltaU--;
+			}
+
+			if (deltaF >= 1) {
 				gamePanel.repaint();
-				lastFrame = now;
 				frames++;
+				deltaF--;
 			}
 
 			if (System.currentTimeMillis() - lastCheck >= 1000) {
 				lastCheck = System.currentTimeMillis();
-				System.out.println("FPS: " + frames);
+				System.out.println("FPS: " + frames + " | UPS: " + updates);
 				frames = 0;
+				updates = 0;
 			}
 
 		}

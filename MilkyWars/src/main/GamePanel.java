@@ -5,33 +5,27 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import input.KeyboardInput;
 import input.MouseInput;
-
-import static util.Constant.PlaterConstants.*;
+import static util.Constant.PlayerConstants.*;
 import static util.Constant.Directions.*;
 
 public class GamePanel extends JPanel {
 
 	private MouseInput mouseInput;
-	private float xDelta = 100, yDelta = 100;
+	private float xPlayer = 100, yPlayer = 100;
 	private BufferedImage img;
 	private BufferedImage[][] animations;
 	private int aniTick, aniIndex, aniSpeed = 144;
-
-	private int playerAction = IDLE;
+	private int playerAction = STOP;
 	private int playerDir = -1;
 	private boolean moving = false;
 
 	public GamePanel() {
-
 		importImg();
 		loadAnimations();
-
 		mouseInput = new MouseInput(this);
 		addKeyListener(new KeyboardInput(this));
 		addMouseListener(mouseInput);
@@ -94,7 +88,7 @@ public class GamePanel extends JPanel {
 		if (moving) {
 			playerAction = SPEED;
 		} else {
-			playerAction = IDLE;
+			playerAction = STOP;
 		}
 	}
 
@@ -102,28 +96,31 @@ public class GamePanel extends JPanel {
 		if (moving) {
 			switch (playerDir) {
 			case LEFT:
-				xDelta -= 5;
+				xPlayer -= 5;
 				break;
 			case RIGHT:
-				xDelta += 5;
+				xPlayer += 5;
 				break;
 			case FORWARD:
-				yDelta -= 5;
+				yPlayer -= 5;
 				break;
 			case BACKWARD:
-				yDelta += 5;
+				yPlayer += 5;
 				break;
 			}
 		}
 	}
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void updateGame() {
 		updateAnimationTick();
 		setAnimation();
 		updatePosition();
+	}
 
-		g.drawImage(animations[playerAction][aniIndex], (int) xDelta, (int) yDelta, 100, 100, null);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		g.drawImage(animations[playerAction][aniIndex], (int) xPlayer, (int) yPlayer, 100, 100, null);
 //		g.drawImage(img, 1266 / 2, 768 / 2, null);
 	}
 
