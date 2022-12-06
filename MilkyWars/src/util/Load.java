@@ -8,9 +8,10 @@ import javax.imageio.ImageIO;
 
 public class Load {
 
-	public static final String PLAYER_ATLAS = "player1sprite.png";
+	public static final String PLAYER_SPRITE = "player1sprite.png";
+	public static final String LEVEL_SPRITE = "level_one.png";
 
-	public static BufferedImage GetSpriteAtlas(String fileName) {
+	public static BufferedImage GetSprite(String fileName) {
 		BufferedImage img = null;
 		InputStream is = Load.class.getResourceAsStream("/" + fileName);
 
