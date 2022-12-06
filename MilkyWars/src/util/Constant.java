@@ -6,7 +6,6 @@ public class Constant {
 		public static final int LEFT = 0;
 		public static final int RIGHT = 1;
 		public static final int FORWARD = 2;
-		public static final int BACKWARD = 3;
 	}
 
 	public static class PlayerConstants {

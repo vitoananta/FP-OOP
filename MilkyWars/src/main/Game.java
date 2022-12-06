@@ -12,6 +12,13 @@ public class Game implements Runnable {
 	private final int TARGET_FPS = 144;
 	private final int TARGET_UPS = 200;
 	private Player player;
+	public final static int TILES_DEFAULT_SIZE = 32;
+	public final static float SCALE = 1.5f;
+	public final static int TILES_IN_WIDTH = 26;
+	public final static int TILES_IN_HEIGHT = 14;
+	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
 	public Game() {
 		initClasses();
@@ -22,7 +29,7 @@ public class Game implements Runnable {
 	}
 
 	private void initClasses() {
-		player = new Player((1366 / 2) - (109 / 2), (768 / 2) - (116 / 2));
+		player = new Player(200, 200, (int) (109 * SCALE), (int) (116 * SCALE));
 	}
 
 	private void startGameLoop() {

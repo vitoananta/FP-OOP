@@ -22,8 +22,8 @@ public class Player extends Entity {
 	private boolean speedUp;
 	private float angle = 0f;
 
-	public Player(float x, float y) {
-		super(x, y);
+	public Player(float x, float y, int width, int height) {
+		super(x, y, width, height);
 		loadAnimations();
 	}
 
@@ -88,7 +88,6 @@ public class Player extends Entity {
 
 	}
 
-	// ROTATE TEST
 	public void changeAngle() {
 		if (angle < 0) {
 			angle = 359;
