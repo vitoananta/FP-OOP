@@ -2,6 +2,9 @@ package main;
 
 import java.awt.Graphics;
 import entity.Player;
+import gamestate.Gamestate;
+import gamestate.Menu;
+import gamestate.Play;
 import level.LevelController;
 
 public class Game implements Runnable {
@@ -20,6 +23,8 @@ public class Game implements Runnable {
 	public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
 	public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+	private Play play;
+	private Menu menu;
 
 	public Game() {
 		initClasses();
@@ -30,9 +35,8 @@ public class Game implements Runnable {
 	}
 
 	private void initClasses() {
-		player = new Player(200, 200, (int) (109 * SCALE), (int) (116 * SCALE));
-		levelController = new LevelController(this);
-		player.loadLevelData(levelController.getCurrentLevel().getLevelData());
+		menu = new Menu(this);
+		play = new Play(this);
 	}
 
 	private void startGameLoop() {
@@ -41,13 +45,31 @@ public class Game implements Runnable {
 	}
 
 	public void update() {
-		levelController.update();
-		player.update();
+		switch (Gamestate.state) {
+		case MENU:
+			menu.update();
+			break;
+		case PLAY:
+			play.update();
+			break;
+		default:
+			break;
+
+		}
 	}
 
 	public void render(Graphics g) {
-		levelController.draw(g);
-		player.render(g);
+		switch (Gamestate.state) {
+		case MENU:
+			menu.draw(g);
+			break;
+		case PLAY:
+			play.draw(g);
+			break;
+		default:
+			break;
+
+		}
 	}
 
 	@Override
@@ -99,7 +121,11 @@ public class Game implements Runnable {
 		player.resetDirBooleans();
 	}
 
-	public Player getPlayer() {
-		return player;
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public Play getPlay() {
+		return play;
 	}
 }

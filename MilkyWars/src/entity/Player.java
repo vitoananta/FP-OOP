@@ -52,8 +52,8 @@ public class Player extends Entity {
 		g2.drawImage(animations[playerAction][aniIndex], tran, null);
 		g2.setTransform(olTransform);
 		
-		g2.setColor(Color.green);
-		g2.draw(getHitbox().getBounds());
+//		g2.setColor(Color.green);
+//		g2.draw(getHitbox().getBounds());
 	}
 
 	private void updateAnimationTick() {
@@ -137,17 +137,6 @@ public class Player extends Entity {
 			speed -= 0.002f;
 		}
 	}
-
-//	private void setForwardBackward() {
-//		if (forward) {
-//			x += Math.cos(Math.toRadians(angle)) * speed;
-//			y += Math.sin(Math.toRadians(angle)) * speed;
-//		} else {
-//			x -= Math.cos(Math.toRadians(angle)) * speed;
-//			y -= Math.sin(Math.toRadians(angle)) * speed;
-//		}
-//
-//	}
 
 	public void resetSpeed() {
 		if (speed >= 0) {
