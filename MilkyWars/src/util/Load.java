@@ -35,7 +35,7 @@ public class Load {
 	}
 
 	public static int[][] GetLevelData() {
-		int[][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
+		int[][] levelData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
 		BufferedImage img = GetSprite(LEVEL_ONE);
 
 		for (int j = 0; j < img.getHeight(); j++) {
@@ -45,9 +45,9 @@ public class Load {
 				if (value >= 48) {
 					value = 0;
 				}
-				lvlData[j][i] = color.getRed();
+				levelData[j][i] = color.getRed();
 			}
 		}
-		return lvlData;
+		return levelData;
 	}
 }
