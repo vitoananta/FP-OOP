@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 public class Load {
 
-	public static final String PLAYER_SPRITE = "player1sprite.png";
-	public static final String LEVEL_SPRITE = "level_one.png";
+	public static final String PLAYER_SPRITE = "player1_sprite.png";
+	public static final String LEVEL_SPRITE = "out_sprite.png";
 
 	public static BufferedImage GetSprite(String fileName) {
 		BufferedImage img = null;

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 
+import util.Load;
+
 public class Player extends Entity {
 
 	private BufferedImage[][] animations;
@@ -17,7 +19,7 @@ public class Player extends Entity {
 	private int playerAction = STOP;
 	private boolean moving = false;
 	private boolean left, right, up;
-	private float maxPlayerSpeed = 0.7f;
+	private float maxPlayerSpeed = 0.5f;
 	private float speed = 0f;
 	private boolean speedUp;
 	private float angle = 0f;
@@ -40,7 +42,7 @@ public class Player extends Entity {
 		AffineTransform olTransform = g2.getTransform();
 		g2.translate(x, y);
 		AffineTransform tran = new AffineTransform();
-		tran.rotate(Math.toRadians(angle + 90), 54.5, 55);
+		tran.rotate(Math.toRadians(angle + 90), 32, 35);
 		g2.drawImage(animations[playerAction][aniIndex], tran, null);
 		g2.setTransform(olTransform);
 	}
@@ -65,24 +67,12 @@ public class Player extends Entity {
 	}
 
 	private void loadAnimations() {
-		InputStream is = getClass().getResourceAsStream("/player1sprite.png");
+		BufferedImage img = Load.GetSprite(Load.PLAYER_SPRITE);
 
-		try {
-			BufferedImage img = ImageIO.read(is);
-
-			animations = new BufferedImage[2][1];
-			for (int j = 0; j < animations.length; j++) {
-				for (int i = 0; i < animations[j].length; i++) {
-					animations[j][i] = img.getSubimage(i * 109, j * 116, 109, 116);
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		animations = new BufferedImage[2][1];
+		for (int j = 0; j < animations.length; j++) {
+			for (int i = 0; i < animations[j].length; i++) {
+				animations[j][i] = img.getSubimage(i * 64, j * 68, 64, 68);
 			}
 		}
 
@@ -102,7 +92,7 @@ public class Player extends Entity {
 		if (speed > maxPlayerSpeed) {
 			speed = maxPlayerSpeed;
 		} else {
-			speed += 0.0085f;
+			speed += 0.005f;
 		}
 	}
 
@@ -111,14 +101,14 @@ public class Player extends Entity {
 		if (speed <= 0) {
 			speed = 0;
 		} else {
-			speed -= 0.003f;
+			speed -= 0.002f;
 		}
 	}
 
 	private void updatePosition() {
 
 		moving = false;
-		float rotateSpeed = 0.3f;
+		float rotateSpeed = 0.2f;
 
 		if (left && !right) {
 			angle -= rotateSpeed;
