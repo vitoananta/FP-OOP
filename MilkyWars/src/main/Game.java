@@ -1,8 +1,8 @@
 package main;
 
 import java.awt.Graphics;
-
 import entity.Player;
+import level.LevelController;
 
 public class Game implements Runnable {
 
@@ -12,6 +12,7 @@ public class Game implements Runnable {
 	private final int TARGET_FPS = 144;
 	private final int TARGET_UPS = 200;
 	private Player player;
+	private LevelController levelController;
 	public final static int TILES_DEFAULT_SIZE = 32;
 	public final static float SCALE = 1.5f;
 	public final static int TILES_IN_WIDTH = 26;
@@ -30,6 +31,7 @@ public class Game implements Runnable {
 
 	private void initClasses() {
 		player = new Player(200, 200, (int) (109 * SCALE), (int) (116 * SCALE));
+		levelController = new LevelController(this);
 	}
 
 	private void startGameLoop() {
@@ -38,10 +40,12 @@ public class Game implements Runnable {
 	}
 
 	public void update() {
+		levelController.update();
 		player.update();
 	}
 
 	public void render(Graphics g) {
+		levelController.draw(g);
 		player.render(g);
 	}
 
