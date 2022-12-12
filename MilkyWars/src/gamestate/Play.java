@@ -81,8 +81,8 @@ public class Play extends State implements Statemethod {
 		player.render(g);
 		renderEnemies(g);
 		g.setColor(Color.white);
-		g.drawString("Score: " + score, Game.GAME_WIDTH / 2 + 3, 27);
-		g.drawString("Highscore is " + highScore, Game.GAME_WIDTH / 2 + 3, 47);
+		g.drawString("Score: " + score, 3, 27);
+		g.drawString("Highscore is " + highScore, 3, 47);
 		if (!player.isAlive()) {
 			gameOverScene.draw(g);
 		}
