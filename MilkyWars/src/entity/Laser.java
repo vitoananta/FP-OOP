@@ -12,7 +12,7 @@ import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import util.Load;
 
-public class Laser implements EntityMethod {
+public class Laser extends Bullet implements EntityMethod {
 
 	private BufferedImage[][] animations;
 	private int aniTick, aniIndex, aniSpeed = 144;

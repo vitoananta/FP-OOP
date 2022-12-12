@@ -97,11 +97,13 @@ public class Play extends State implements Statemethod {
 			public void run() {
 				while (true) {
 					phaseCounter++;
-					spawnInvader();
+					spawnInvader(0);
+					spawnInvader(180f);
 					try {
 						TimeUnit.SECONDS.sleep(timeInSecond);
 					} catch (InterruptedException e) {
-						JOptionPane.showMessageDialog(null, "Cannot delay the enemy! Please close the game immedietly.");
+						JOptionPane.showMessageDialog(null,
+								"Cannot delay the enemy! Please close the game immedietly.");
 						e.printStackTrace();
 					}
 					System.out.println("The enemy delay is: " + timeInSecond);
@@ -282,18 +284,24 @@ public class Play extends State implements Statemethod {
 		}
 	}
 
-	private void spawnInvader() {
+	private void spawnInvader(int width) {
 		Random ran = new Random();
 		int spawnY = ran.nextInt(Game.GAME_HEIGHT);
-		Invader invader = new Invader();
-		invader.changeLocation(0, spawnY);
-		invader.changeAngle(0);
-		invaders.add(invader);
+		Invader invader1 = new Invader();
+		invader1.changeLocation(width, spawnY);
+		invader1.changeAngle(0);
+		invaders.add(invader1);
+		invader1.printEnemyDetail();
+	}
+
+	private void spawnInvader(float angle) {
+		Random ran = new Random();
 		int spawnY2 = ran.nextInt(Game.GAME_HEIGHT);
 		Invader invader2 = new Invader();
 		invader2.changeLocation(Game.GAME_WIDTH, spawnY2);
-		invader2.changeAngle(180);
+		invader2.changeAngle(angle);
 		invaders.add(invader2);
+		invader2.printEnemyDetail();
 	}
 
 	private void spawnMeteor() {
@@ -303,11 +311,13 @@ public class Play extends State implements Statemethod {
 		meteor1.changeLocation(spawnX, 0);
 		meteor1.changeAngle(90);
 		meteors.add(meteor1);
+		meteor1.printEnemyDetail();
 		Meteor meteor2 = new Meteor();
 		int spawnX2 = ran.nextInt(Game.GAME_WIDTH);
 		meteor2.changeLocation(spawnX2, Game.GAME_HEIGHT);
 		meteor2.changeAngle(270);
 		meteors.add(meteor2);
+		meteor2.printEnemyDetail();
 	}
 
 	@Override
@@ -409,11 +419,15 @@ public class Play extends State implements Statemethod {
 	}
 
 	private String getHighScore() throws IOException {
+		ListOfUsername<String> stringGen = new ListOfUsername<String>();
 		try (BufferedReader reader = new BufferedReader(new FileReader("highscore.txt"))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				highScore = line;
 			}
+			stringGen.add(line);
+		} catch (Exception e) {
+			highScore = "Username:0";
 		}
 		return highScore;
 	}

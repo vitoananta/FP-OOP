@@ -25,7 +25,7 @@ public class Meteor extends Object implements EntityMethod {
 	private float angle = 0f;
 
 	public Meteor() {
-		super(new Health(50, 50));
+		super(new Health(75, 75));
 		loadAnimations();
 		initHitbox();
 	}
@@ -148,5 +148,9 @@ public class Meteor extends Object implements EntityMethod {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public String printEnemyDetail() {
+		return ("This enemy is meteor! It gives more damage than invader when collding.");
 	}
 }

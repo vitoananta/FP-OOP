@@ -157,4 +157,8 @@ public class Invader extends Object implements EntityMethod {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public String printEnemyDetail() {
+		return ("This enemy is meteor! you need to destroy this ASAP.");
+	}
 }
