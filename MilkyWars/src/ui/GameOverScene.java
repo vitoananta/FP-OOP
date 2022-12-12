@@ -3,9 +3,13 @@ package ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.Iterator;
 
 import gamestate.Gamestate;
 import gamestate.Play;
+import gamestate.Score;
+import gamestate.ScoreList;
 import main.Game;
 
 public class GameOverScene {

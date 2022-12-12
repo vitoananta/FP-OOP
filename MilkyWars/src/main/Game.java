@@ -121,7 +121,8 @@ public class Game implements Runnable {
 	}
 
 	public void windowFocusLost() {
-		player.resetDirBooleans();
+		if (Gamestate.state == Gamestate.PLAY)
+			play.getPlayer().resetDirBooleans();
 	}
 
 	public Menu getMenu() {

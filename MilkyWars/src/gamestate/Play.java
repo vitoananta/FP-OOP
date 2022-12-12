@@ -6,10 +6,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import javax.swing.JOptionPane;
 
 import entity.Health;
 import entity.Invader;
@@ -86,9 +90,6 @@ public class Play extends State implements Statemethod {
 
 			@Override
 			public void run() {
-//				long timeInSecond = 7;
-//				int phaseCounter = 0;
-//				boolean phaseMax = false;
 				while (true) {
 					phaseCounter++;
 					spawnInvader();
@@ -216,6 +217,11 @@ public class Play extends State implements Statemethod {
 				}
 				if (!player.updateHp((float) invaderHp)) {
 					player.setAlive(false);
+					try {
+						addScore(score);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					System.out.println("Dead by Invader");
 				}
 			}
@@ -233,6 +239,11 @@ public class Play extends State implements Statemethod {
 				}
 				if (!player.updateHp((float) meteorHp)) {
 					player.setAlive(false);
+					try {
+						addScore(score);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					System.out.println("Dead by Meteor");
 				}
 			}
@@ -365,8 +376,17 @@ public class Play extends State implements Statemethod {
 		return invaders;
 	}
 
-//	public void setGameOver(boolean gameOver) {
-//		this.gameOver = gameOver;
-//	}
+	public static void addScore(int score) throws IOException {
+		String username = JOptionPane.showInputDialog("Please input your username");
 
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter("score.txt", true);
+		} catch (IOException e) {
+			System.out.println("Can not write score");
+		}
+
+		writer.write(username + ": " + score + "\n");
+		writer.close();
+	}
 }
