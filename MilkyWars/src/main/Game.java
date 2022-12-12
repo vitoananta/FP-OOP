@@ -11,7 +11,7 @@ public class Game implements Runnable {
 
 	private GameWindow gameWindow;
 	private GamePanel gamePanel;
-	private Thread gameThread;
+	public Thread gameThread;
 	private final int TARGET_FPS = 144;
 	private final int TARGET_UPS = 200;
 	private Player player;

@@ -3,23 +3,20 @@ package entity;
 import static util.Constant.PlayerConstants.GetSpriteAmount;
 import static util.Constant.PlayerConstants.*;
 import static util.TestMethod.*;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
-
 import util.Load;
 
-public class Player extends Entity {
+public class Player implements EntityMethod {
 
+	private float x, y;
+	private int width, height;
 	private BufferedImage[][] animations;
-	private int aniTick, aniIndex, aniSpeed = 144;
+	private int aniTick, aniIndex, aniSpeed = 1;
 	private int playerAction = STOP;
 	private boolean moving = false;
 	private boolean left, right, up, stop;
@@ -30,9 +27,12 @@ public class Player extends Entity {
 	private int[][] levelData;
 
 	public Player(float x, float y, int width, int height) {
-		super(x, y, width, height);
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 		loadAnimations();
-		initPlayerHitbox();
+		initHitbox();
 	}
 
 	public void update() {
@@ -52,11 +52,12 @@ public class Player extends Entity {
 		g2.drawImage(animations[playerAction][aniIndex], tran, null);
 		g2.setTransform(olTransform);
 
-		g2.setColor(Color.green);
-		g2.draw(getHitbox());
+		// check hitbox
+//		g2.setColor(Color.green);
+//		g2.draw(getHitbox());
 	}
 
-	private void updateAnimationTick() {
+	public void updateAnimationTick() {
 		aniTick++;
 		if (aniTick >= aniSpeed) {
 			aniTick = 0;
@@ -67,7 +68,7 @@ public class Player extends Entity {
 		}
 	}
 
-	private void setAnimation() {
+	public void setAnimation() {
 		if (moving) {
 			playerAction = SPEED;
 		} else {
@@ -75,7 +76,7 @@ public class Player extends Entity {
 		}
 	}
 
-	private void loadAnimations() {
+	public void loadAnimations() {
 		BufferedImage img = Load.GetSprite(Load.PLAYER_SPRITE);
 
 		animations = new BufferedImage[2][1];
@@ -87,7 +88,7 @@ public class Player extends Entity {
 
 	}
 
-	private void initPlayerHitbox() {
+	public void initHitbox() {
 		Path2D p = new Path2D.Double();
 		p.moveTo(19, 35);
 		p.lineTo(19, 29);
@@ -114,12 +115,13 @@ public class Player extends Entity {
 		return new Area(afx.createTransformedShape(playerShape));
 	}
 
-	public void changeAngle() {
+	public void changeAngle(float angle) {
 		if (angle < 0) {
 			angle = 359;
 		} else if (angle > 359) {
 			angle = 0;
 		}
+		this.angle = angle;
 	}
 
 	public void speedUp() {
@@ -163,7 +165,7 @@ public class Player extends Entity {
 			moving = true;
 			stop = false;
 			speedUp();
-			rotateSpeed = 0.15f;
+			rotateSpeed = 0.2f;
 			if (left && !right) {
 				angle -= rotateSpeed;
 			} else if (right && !left) {
@@ -177,6 +179,7 @@ public class Player extends Entity {
 			resetSpeed();
 			moving = false;
 		}
+
 	}
 
 	public void loadLevelData(int[][] levelData) {
@@ -218,10 +221,10 @@ public class Player extends Entity {
 	}
 
 	public float getX() {
-		return super.x;
+		return x;
 	}
 
 	public float getY() {
-		return super.y;
+		return y;
 	}
 }
