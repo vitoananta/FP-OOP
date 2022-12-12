@@ -3,12 +3,15 @@ package entity;
 import static util.Constant.PlayerConstants.GetSpriteAmount;
 import static util.Constant.PlayerConstants.SPEED;
 import static util.Constant.PlayerConstants.STOP;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Random;
@@ -17,13 +20,13 @@ import gamestate.Play;
 import main.Game;
 import util.Load;
 
-public class Invader implements EntityMethod {
+public class Invader extends HpRender implements EntityMethod {
 
 	private BufferedImage[][] animations;
 	private int aniTick, aniIndex, aniSpeed = 144;
 	private int enemyState = STOP;
 	private boolean moving = false;
-	private Area enemyShape;
+	private Area invaderShape;
 
 	private double x, y;
 	private final float speed = 0.5f;
@@ -31,6 +34,7 @@ public class Invader implements EntityMethod {
 	private Play play;
 
 	public Invader() {
+		super(new Health(20, 20));
 		loadAnimations();
 		initHitbox();
 	}
@@ -50,6 +54,11 @@ public class Invader implements EntityMethod {
 		tran.rotate(Math.toRadians(angle + 90), 32, 35);
 		g2.drawImage(animations[enemyState][aniIndex], tran, null);
 		g2.setTransform(olTransform);
+//
+//		double hpY = (getHitbox().getBounds().getY() - 15);
+//		g2.setColor(Color.white);
+//		g2.fill(new Rectangle2D.Double(x, hpY, 64, 3));
+		hpRender(g2, getHitbox(), x);
 
 		// check hitbox
 //		g2.setColor(Color.red);
@@ -104,14 +113,14 @@ public class Invader implements EntityMethod {
 		p.lineTo(10, 54);
 		p.lineTo(16, 42);
 		p.lineTo(24, 39);
-		enemyShape = new Area(p);
+		invaderShape = new Area(p);
 	}
 
 	public Area getHitbox() {
 		AffineTransform afx = new AffineTransform();
 		afx.translate(x, y);
 		afx.rotate(Math.toRadians(angle), 32, 35);
-		return new Area(afx.createTransformedShape(enemyShape));
+		return new Area(afx.createTransformedShape(invaderShape));
 	}
 
 	public void changeLocation(double x, double y) {
