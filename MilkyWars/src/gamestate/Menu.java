@@ -15,9 +15,11 @@ public class Menu extends State implements Statemethod {
 
 	private MenuButton[] button = new MenuButton[3];
 	private BufferedImage backgroundImgBlack;
+	private Play play;
 
-	public Menu(Game game) {
+	public Menu(Game game, Play play) {
 		super(game);
+		this.play = play;
 		loadButton();
 		backgroundImgBlack = Load.GetSprite(Load.MENU_BACKGROUND);
 	}
@@ -95,6 +97,7 @@ public class Menu extends State implements Statemethod {
 	@Override
 	public void keyPress(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			play.resetAll();
 			Gamestate.state = Gamestate.PLAY;
 		}
 

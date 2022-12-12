@@ -1,5 +1,6 @@
 package gamestate;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -10,14 +11,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import javax.print.attribute.AttributeSetUtilities;
-
+import entity.Health;
 import entity.Invader;
 import entity.Laser;
 import entity.Meteor;
 import entity.Player;
 import level.LevelController;
 import main.Game;
+import ui.GameOverScene;
 import util.Load;
 
 public class Play extends State implements Statemethod {
@@ -31,7 +32,12 @@ public class Play extends State implements Statemethod {
 	private int shotTime;
 	private LevelController levelController;
 	private BufferedImage backgroundImg;
-	private boolean shooting;
+	private GameOverScene gameOverScene;
+//	private Health health;
+	private int score = 0;
+	private long timeInSecond = 7;
+	private int phaseCounter = 0;
+	private boolean phaseMax = false;
 
 	public Play(Game game) {
 		super(game);
@@ -41,19 +47,22 @@ public class Play extends State implements Statemethod {
 
 	private void initClasses() {
 		levelController = new LevelController(game);
-		player = new Player(Game.GAME_WIDTH / 2 - 35, 500, 64, 68);
+		player = new Player(Game.GAME_WIDTH / 2 - 35, 500, 64, 68, this);
 		player.changeAngle(270);
 		player.loadLevelData(levelController.getCurrentLevel().getLevelData());
 		initEnemies();
 		initLaser();
+		gameOverScene = new GameOverScene(this);
 	}
 
 	@Override
 	public void update() {
-		levelController.update();
-		player.update();
-		updateEnemies();
-		updateLaser();
+		if (player.isAlive()) {
+			levelController.update();
+			player.update();
+			updateEnemies();
+			updateLaser();
+		}
 	}
 
 	@Override
@@ -63,6 +72,11 @@ public class Play extends State implements Statemethod {
 		renderLaser(g);
 		player.render(g);
 		renderEnemies(g);
+		g.setColor(Color.white);
+		g.drawString("Score: " + score, Game.GAME_WIDTH / 2 + 3, 27);
+		if (!player.isAlive()) {
+			gameOverScene.draw(g);
+		}
 	}
 
 	private void initEnemies() {
@@ -72,9 +86,9 @@ public class Play extends State implements Statemethod {
 
 			@Override
 			public void run() {
-				long timeInSecond = 7;
-				int phaseCounter = 0;
-				boolean phaseMax = false;
+//				long timeInSecond = 7;
+//				int phaseCounter = 0;
+//				boolean phaseMax = false;
 				while (true) {
 					phaseCounter++;
 					spawnInvader();
@@ -111,7 +125,7 @@ public class Play extends State implements Statemethod {
 					invaders.remove(invader);
 				} else {
 					if (player.isAlive()) {
-						collidePlayer(invader);
+						collidePlayerInvader(invader);
 					}
 				}
 			}
@@ -122,6 +136,10 @@ public class Play extends State implements Statemethod {
 				meteor.update();
 				if (!meteor.checkOutside(Game.GAME_WIDTH, Game.GAME_HEIGHT)) {
 					meteors.remove(meteor);
+				} else {
+					if (player.isAlive()) {
+						collidePlayerMeteor(meteor);
+					}
 				}
 			}
 		}
@@ -179,6 +197,7 @@ public class Play extends State implements Statemethod {
 				if (!laserHitbox.isEmpty()) {
 					if (!invader.updateHp(laser.getDamage())) {
 						invaders.remove(invader);
+						score++;
 					}
 					lasers.remove(laser);
 				}
@@ -186,7 +205,7 @@ public class Play extends State implements Statemethod {
 		}
 	}
 
-	private void collidePlayer(Invader invader) {
+	private void collidePlayerInvader(Invader invader) {
 		if (invader != null) {
 			Area playerHitbox = new Area(player.getHitbox());
 			playerHitbox.intersect(invader.getHitbox());
@@ -197,6 +216,24 @@ public class Play extends State implements Statemethod {
 				}
 				if (!player.updateHp((float) invaderHp)) {
 					player.setAlive(false);
+					System.out.println("Dead by Invader");
+				}
+			}
+		}
+	}
+
+	private void collidePlayerMeteor(Meteor meteor) {
+		if (meteor != null) {
+			Area playerHitbox = new Area(player.getHitbox());
+			playerHitbox.intersect(meteor.getHitbox());
+			if (!playerHitbox.isEmpty()) {
+				double meteorHp = meteor.getHp();
+				if (!meteor.updateHp((float) player.getHp())) {
+					meteors.remove(meteor);
+				}
+				if (!player.updateHp((float) meteorHp)) {
+					player.setAlive(false);
+					System.out.println("Dead by Meteor");
 				}
 			}
 		}
@@ -204,12 +241,12 @@ public class Play extends State implements Statemethod {
 
 	private void spawnInvader() {
 		Random ran = new Random();
-		int spawnY = ran.nextInt(Game.GAME_HEIGHT + 100) - 50;
+		int spawnY = ran.nextInt(Game.GAME_HEIGHT);
 		Invader invader = new Invader();
 		invader.changeLocation(0, spawnY);
 		invader.changeAngle(0);
 		invaders.add(invader);
-		int spawnY2 = ran.nextInt(Game.GAME_HEIGHT + 100) - 50;
+		int spawnY2 = ran.nextInt(Game.GAME_HEIGHT);
 		Invader invader2 = new Invader();
 		invader2.changeLocation(Game.GAME_WIDTH, spawnY2);
 		invader2.changeAngle(180);
@@ -219,12 +256,12 @@ public class Play extends State implements Statemethod {
 	private void spawnMeteor() {
 		Random ran = new Random();
 		Meteor meteor1 = new Meteor();
-		int spawnX = ran.nextInt(Game.GAME_WIDTH + 100) - 50;
+		int spawnX = ran.nextInt(Game.GAME_WIDTH);
 		meteor1.changeLocation(spawnX, 0);
 		meteor1.changeAngle(90);
 		meteors.add(meteor1);
 		Meteor meteor2 = new Meteor();
-		int spawnX2 = ran.nextInt(Game.GAME_WIDTH + 100) - 50;
+		int spawnX2 = ran.nextInt(Game.GAME_WIDTH);
 		meteor2.changeLocation(spawnX2, Game.GAME_HEIGHT);
 		meteor2.changeAngle(270);
 		meteors.add(meteor2);
@@ -256,48 +293,63 @@ public class Play extends State implements Statemethod {
 
 	@Override
 	public void keyPress(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_W:
-			player.setUp(true);
-			break;
-		case KeyEvent.VK_A:
-			player.setLeft(true);
-			break;
-		case KeyEvent.VK_D:
-			player.setRight(true);
-			break;
-		case KeyEvent.VK_SPACE:
-			if (shotTime == 0) {
-				lasers.add(0, new Laser(player.getX(), player.getY(), player.getAngle(), 10, 2f));
+		if (!player.isAlive()) {
+			gameOverScene.keyPres(e);
+		} else {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_W:
+				player.setUp(true);
+				break;
+			case KeyEvent.VK_A:
+				player.setLeft(true);
+				break;
+			case KeyEvent.VK_D:
+				player.setRight(true);
+				break;
+			case KeyEvent.VK_SPACE:
+				if (shotTime == 0) {
+					lasers.add(0, new Laser(player.getX(), player.getY(), player.getAngle(), 10, 2f));
+				}
+				shotTime++;
+				if (shotTime == 5) {
+					shotTime = 0;
+				}
+				break;
+			case KeyEvent.VK_ESCAPE:
+				Gamestate.state = Gamestate.MENU;
+				break;
 			}
-			shotTime++;
-			if (shotTime == 5) {
-				shotTime = 0;
-			}
-			break;
-		case KeyEvent.VK_ESCAPE:
-			Gamestate.state = Gamestate.MENU;
-			break;
 		}
-
 	}
 
 	@Override
 	public void keyRelease(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_W:
-			player.setUp(false);
-			break;
-		case KeyEvent.VK_A:
-			player.setLeft(false);
-			break;
-		case KeyEvent.VK_D:
-			player.setRight(false);
-			break;
-		case KeyEvent.VK_SPACE:
-			shotTime = 0;
-			break;
+		if (player.isAlive()) {
+			switch (e.getKeyCode()) {
+			case KeyEvent.VK_W:
+				player.setUp(false);
+				break;
+			case KeyEvent.VK_A:
+				player.setLeft(false);
+				break;
+			case KeyEvent.VK_D:
+				player.setRight(false);
+				break;
+			case KeyEvent.VK_SPACE:
+				shotTime = 0;
+				break;
+			}
 		}
+	}
+
+	public void resetAll() {
+		player.reset();
+		invaders.clear();
+		meteors.clear();
+		score = 0;
+		timeInSecond = 7;
+		phaseCounter = 0;
+		phaseMax = false;
 
 	}
 
@@ -312,5 +364,9 @@ public class Play extends State implements Statemethod {
 	public List<Invader> getInvaders() {
 		return invaders;
 	}
+
+//	public void setGameOver(boolean gameOver) {
+//		this.gameOver = gameOver;
+//	}
 
 }

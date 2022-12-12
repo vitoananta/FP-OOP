@@ -14,10 +14,21 @@ public class Object {
 	}
 
 	protected void hpRender(Graphics2D g2, Shape shape, double x) {
+		if (hp.getCurrentHealth() != hp.getMaxHealth()) {
+			double hpY = (shape.getBounds().getY() - 30);
+			g2.setColor(Color.white);
+			g2.fill(new Rectangle2D.Double(x, hpY, 64, 3));
+			g2.setColor(new Color(255, 33, 33));
+			double hpNow = hp.getCurrentHealth() / hp.getMaxHealth() * 64;
+			g2.fill(new Rectangle2D.Double(x, hpY, hpNow, 3));
+		}
+	}
+
+	protected void hpRenderPlayer(Graphics2D g2, Shape shape, double x) {
 		double hpY = (shape.getBounds().getY() - 30);
 		g2.setColor(Color.white);
 		g2.fill(new Rectangle2D.Double(x, hpY, 64, 3));
-		g2.setColor(new Color(196, 12, 12));
+		g2.setColor(new Color(8, 255, 78));
 		double hpNow = hp.getCurrentHealth() / hp.getMaxHealth() * 64;
 		g2.fill(new Rectangle2D.Double(x, hpY, hpNow, 3));
 	}

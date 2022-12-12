@@ -12,7 +12,7 @@ import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
 import util.Load;
 
-public class Meteor implements EntityMethod {
+public class Meteor extends Object implements EntityMethod {
 
 	private BufferedImage[][] animations;
 	private int aniTick, aniIndex, aniSpeed = 60;
@@ -25,6 +25,7 @@ public class Meteor implements EntityMethod {
 	private float angle = 0f;
 
 	public Meteor() {
+		super(new Health(50, 50));
 		loadAnimations();
 		initHitbox();
 	}
