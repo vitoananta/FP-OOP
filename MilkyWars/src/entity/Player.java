@@ -22,7 +22,7 @@ public class Player extends Entity {
 	private int aniTick, aniIndex, aniSpeed = 144;
 	private int playerAction = STOP;
 	private boolean moving = false;
-	private boolean left, right, up, forward, stop;
+	private boolean left, right, up, stop;
 	private float maxPlayerSpeed = 0.4f;
 	private float speed = 0f;
 	private float angle = 0f;
@@ -51,9 +51,9 @@ public class Player extends Entity {
 		tran.rotate(Math.toRadians(angle + 90), 32, 35);
 		g2.drawImage(animations[playerAction][aniIndex], tran, null);
 		g2.setTransform(olTransform);
-		
-//		g2.setColor(Color.green);
-//		g2.draw(getHitbox().getBounds());
+
+		g2.setColor(Color.green);
+		g2.draw(getHitbox());
 	}
 
 	private void updateAnimationTick() {
@@ -160,7 +160,6 @@ public class Player extends Entity {
 		}
 
 		if (up) {
-			forward = true;
 			moving = true;
 			stop = false;
 			speedUp();

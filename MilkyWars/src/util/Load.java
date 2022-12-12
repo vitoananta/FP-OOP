@@ -16,6 +16,8 @@ public class Load {
 	public static final String LEVEL_ONE = "level_one.png";
 	public static final String MENU_BUTTON = "menu_button.png";
 	public static final String MENU_BACKGROUND = "black_background.png";
+	public static final String PLAY_BACKGROUND1 = "blue_background.png";
+	public static final String ENEMY1_SPRITE = "enemy1_sprite.png";
 
 	public static BufferedImage GetSprite(String fileName) {
 		BufferedImage img = null;

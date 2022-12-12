@@ -3,19 +3,23 @@ package gamestate;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 import entity.Player;
 import level.LevelController;
 import level.LevelController;
 import main.Game;
+import util.Load;
 
 public class Play extends State implements Statemethod {
 	private Player player;
 	private LevelController levelController;
+	private BufferedImage backgroundImg;
 
 	public Play(Game game) {
 		super(game);
 		initClasses();
+		backgroundImg = Load.GetSprite(Load.PLAY_BACKGROUND1);
 	}
 
 	private void initClasses() {
@@ -33,6 +37,7 @@ public class Play extends State implements Statemethod {
 
 	@Override
 	public void draw(Graphics g) {
+		g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
 		levelController.draw(g);
 		player.render(g);
 
