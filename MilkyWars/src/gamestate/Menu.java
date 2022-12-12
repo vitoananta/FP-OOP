@@ -4,27 +4,43 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.util.Iterator;
 
 import main.Game;
+import ui.MenuButton;
+import util.Load;
 
 public class Menu extends State implements Statemethod {
 
+	private MenuButton[] button = new MenuButton[3];
+	private BufferedImage backgroundImgBlack;
+
 	public Menu(Game game) {
 		super(game);
-		// TODO Auto-generated constructor stub
+		loadButton();
+		backgroundImgBlack = Load.GetSprite(Load.MENU_BACKGROUND);
+	}
+
+	private void loadButton() {
+		button[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, Gamestate.PLAY);
+		button[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, Gamestate.HIGHSCORE);
+		button[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
 	}
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		for (MenuButton menuButton : button) {
+			menuButton.update();
+		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.black);
-		g.drawString("MILKY WARS", Game.GAME_WIDTH / 2, Game.GAME_HEIGHT / 2-10);
-		g.drawString("Game Menu", Game.GAME_WIDTH / 2, Game.GAME_HEIGHT / 2 + 10);
+		g.drawImage(backgroundImgBlack, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+		for (MenuButton menuButton : button) {
+			menuButton.draw(g);
+		}
 	}
 
 	@Override
@@ -35,19 +51,44 @@ public class Menu extends State implements Statemethod {
 
 	@Override
 	public void mousePress(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		for (MenuButton menuButton : button) {
+			if (isInButton(e, menuButton)) {
+				menuButton.setMousePress(true);
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void mouseRelease(MouseEvent e) {
-		// TODO Auto-generated method stub
+		for (MenuButton menuButton : button) {
+			if (isInButton(e, menuButton)) {
+				if (menuButton.isMousePress()) {
+					menuButton.applyGamestate();
+					break;
+				}
+			}
+		}
+		resetButtons();
+	}
 
+	private void resetButtons() {
+		for (MenuButton menuButton : button) {
+			menuButton.resetBoolean();
+		}
 	}
 
 	@Override
 	public void mouseMove(MouseEvent e) {
-		// TODO Auto-generated method stub
+		for (MenuButton menuButton : button) {
+			menuButton.setMouseHover(false);
+		}
+		for (MenuButton menuButton : button) {
+			if (isInButton(e, menuButton)) {
+				menuButton.setMouseHover(true);
+				break;
+			}
+		}
 
 	}
 
