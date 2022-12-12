@@ -21,7 +21,7 @@ public class Player extends Object implements EntityMethod {
 	private float x, y;
 	private int width, height;
 	private BufferedImage[][] animations;
-	private int aniTick, aniIndex, aniSpeed = 1;
+	private int aniTick, aniIndex, aniSpeed = 2;
 	private int playerAction = STOP;
 	private boolean moving = false;
 	private boolean left, right, up, stop;
@@ -248,6 +248,7 @@ public class Player extends Object implements EntityMethod {
 
 	public void reset() {
 		resetDirBooleans();
+		resetSpeed();
 		resetHp();
 		alive = true;
 	}

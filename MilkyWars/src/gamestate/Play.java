@@ -6,6 +6,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,8 +42,8 @@ public class Play extends State implements Statemethod {
 	private LevelController levelController;
 	private BufferedImage backgroundImg;
 	private GameOverScene gameOverScene;
-//	private Health health;
 	private int score = 0;
+	private String highScore;
 	private long timeInSecond = 7;
 	private int phaseCounter = 0;
 	private boolean phaseMax = false;
@@ -57,6 +62,12 @@ public class Play extends State implements Statemethod {
 		initEnemies();
 		initLaser();
 		gameOverScene = new GameOverScene(this);
+		try {
+			highScore = this.getHighScore();
+		} catch (IOException e) {
+			System.out.println("There is missing file!");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -78,6 +89,7 @@ public class Play extends State implements Statemethod {
 		renderEnemies(g);
 		g.setColor(Color.white);
 		g.drawString("Score: " + score, Game.GAME_WIDTH / 2 + 3, 27);
+		g.drawString("Highscore is " + highScore, Game.GAME_WIDTH / 2 + 3, 47);
 		if (!player.isAlive()) {
 			gameOverScene.draw(g);
 		}
@@ -217,12 +229,8 @@ public class Play extends State implements Statemethod {
 				}
 				if (!player.updateHp((float) invaderHp)) {
 					player.setAlive(false);
-					try {
-						addScore(score);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					System.out.println("Dead by Invader");
+					updateHighscore();
+//					System.out.println("Dead by Invader");
 				}
 			}
 		}
@@ -239,12 +247,43 @@ public class Play extends State implements Statemethod {
 				}
 				if (!player.updateHp((float) meteorHp)) {
 					player.setAlive(false);
-					try {
-						addScore(score);
-					} catch (IOException e) {
-						e.printStackTrace();
+					updateHighscore();
+//					System.out.println("Dead by Meteor");
+				}
+			}
+		}
+	}
+
+	private void updateHighscore() {
+		if (score > Integer.parseInt(highScore.split(":")[1])) {
+			String username = JOptionPane.showInputDialog("WOW a new highscore is beated! Please input your username!");
+			highScore = username + ":" + score;
+
+			File highscoreFile = new File("highscore.txt");
+			if (!highscoreFile.exists()) {
+				try {
+					highscoreFile.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			FileWriter writeFile = null;
+			BufferedWriter writerFile = null;
+
+			try {
+				writeFile = new FileWriter(highscoreFile);
+				writerFile = new BufferedWriter(writeFile);
+				writerFile.write(this.highScore);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (writerFile != null) {
+						writerFile.close();
 					}
-					System.out.println("Dead by Meteor");
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -376,17 +415,12 @@ public class Play extends State implements Statemethod {
 		return invaders;
 	}
 
-	public static void addScore(int score) throws IOException {
-		String username = JOptionPane.showInputDialog("Please input your username");
-
-		FileWriter writer = null;
-		try {
-			writer = new FileWriter("score.txt", true);
-		} catch (IOException e) {
-			System.out.println("Can not write score");
+	private String getHighScore() throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader("highscore.txt"));
+		String line;
+		while ((line = reader.readLine()) != null) {
+			highScore = line;
 		}
-
-		writer.write(username + ": " + score + "\n");
-		writer.close();
+		return highScore;
 	}
 }

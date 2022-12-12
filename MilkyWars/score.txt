@@ -1,7 +1,0 @@
-Ronaldo: 1
-Messi: 3
-Neymar: 2
-Joko: 45
-Udin: 5
-Ucup: 7
-Supri: 4
