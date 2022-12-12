@@ -3,38 +3,36 @@ package entity;
 import static util.Constant.PlayerConstants.GetSpriteAmount;
 import static util.Constant.PlayerConstants.SPEED;
 import static util.Constant.PlayerConstants.STOP;
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.Random;
 
 import gamestate.Play;
-import main.Game;
 import util.Load;
 
-public class Invader extends Object implements EntityMethod {
+public class Laser implements EntityMethod {
 
 	private BufferedImage[][] animations;
 	private int aniTick, aniIndex, aniSpeed = 144;
-	private int enemyState = STOP;
+	private int laserState = STOP;
 	private boolean moving = false;
-	private Area invaderShape;
+	private Area laserShape;
 
 	private double x, y;
-	private final float speed = 0.5f;
-	private float angle = 0f;
-	private Play play;
+	private final float angle;
+	private float damage;
+	private float speed = 0.5f;
 
-	public Invader() {
-		super(new Health(50, 50));
+	public Laser(double x, double y, float angle, float size, float speed) {
+		this.x = x;
+		this.y = y;
+		this.angle = angle;
+		this.damage = size;
+		this.speed = speed;
 		loadAnimations();
 		initHitbox();
 	}
@@ -52,13 +50,8 @@ public class Invader extends Object implements EntityMethod {
 		g2.translate(x, y);
 		AffineTransform tran = new AffineTransform();
 		tran.rotate(Math.toRadians(angle + 90), 32, 35);
-		g2.drawImage(animations[enemyState][aniIndex], tran, null);
+		g2.drawImage(animations[0][0], tran, null);
 		g2.setTransform(olTransform);
-//
-//		double hpY = (getHitbox().getBounds().getY() - 15);
-//		g2.setColor(Color.white);
-//		g2.fill(new Rectangle2D.Double(x, hpY, 64, 3));
-		hpRender(g2, getHitbox(), x);
 
 		// check hitbox
 //		g2.setColor(Color.red);
@@ -70,7 +63,7 @@ public class Invader extends Object implements EntityMethod {
 		if (aniTick >= aniSpeed) {
 			aniTick = 0;
 			aniIndex++;
-			if (aniIndex >= GetSpriteAmount(enemyState)) {
+			if (aniIndex >= GetSpriteAmount(laserState)) {
 				aniIndex = 0;
 			}
 		}
@@ -78,16 +71,14 @@ public class Invader extends Object implements EntityMethod {
 
 	public void setAnimation() {
 		if (moving) {
-			enemyState = SPEED;
-		} else {
-			enemyState = STOP;
+			laserState = SPEED;
 		}
 	}
 
 	public void loadAnimations() {
-		BufferedImage img = Load.GetSprite(Load.ENEMY1_SPRITE);
+		BufferedImage img = Load.GetSprite(Load.LASER_SPRITE);
 
-		animations = new BufferedImage[2][1];
+		animations = new BufferedImage[1][1];
 		for (int j = 0; j < animations.length; j++) {
 			for (int i = 0; i < animations[j].length; i++) {
 				animations[j][i] = img.getSubimage(i * 64, j * 68, 64, 68);
@@ -98,57 +89,36 @@ public class Invader extends Object implements EntityMethod {
 
 	public void initHitbox() {
 		Path2D p = new Path2D.Double();
-		p.moveTo(24, 35);
-		p.lineTo(24, 29);
-		p.lineTo(16, 29);
-		p.lineTo(10, 17);
-		p.lineTo(27, 5);
-		p.lineTo(64, 20);
-		p.lineTo(62, 32);
-		p.lineTo(50, 27);
-		p.lineTo(50, 42);
-		p.lineTo(62, 39);
-		p.lineTo(64, 51);
-		p.lineTo(27, 66);
-		p.lineTo(10, 54);
-		p.lineTo(16, 42);
-		p.lineTo(24, 39);
-		invaderShape = new Area(p);
+		p.moveTo(21, 34);
+		p.lineTo(27, 34);
+		p.lineTo(28, 33);
+		p.lineTo(29, 32);
+		p.lineTo(53, 32);
+		p.lineTo(54, 33);
+		p.lineTo(54, 37);
+		p.lineTo(53, 38);
+		p.lineTo(29, 38);
+		p.lineTo(28, 37);
+		p.lineTo(27, 36);
+		p.lineTo(21, 36);
+		laserShape = new Area(p);
 	}
 
 	public Area getHitbox() {
 		AffineTransform afx = new AffineTransform();
 		afx.translate(x, y);
 		afx.rotate(Math.toRadians(angle), 32, 35);
-		return new Area(afx.createTransformedShape(invaderShape));
-	}
-
-	public void changeLocation(double x, double y) {
-		this.x = x;
-		this.y = y;
-	}
-
-	public void changeAngle(float angle) {
-		if (angle < 0) {
-			angle = 359;
-		} else if (angle > 359) {
-			angle = 0;
-		}
-		this.angle = angle;
+		return new Area(afx.createTransformedShape(laserShape));
 	}
 
 	public boolean checkOutside(int width, int height) {
-		Rectangle enemyHitbox = getHitbox().getBounds();
-		if (x <= -enemyHitbox.getWidth() || y < -enemyHitbox.getHeight() || x > width || y > height) {
+		Rectangle laserHitbox = getHitbox().getBounds();
+		if (x <= -laserHitbox.getWidth() || y < -laserHitbox.getHeight() || x > width || y > height) {
 			return false;
 		} else {
 			moving = true;
 			return true;
 		}
-	}
-
-	public float getAngle() {
-		return angle;
 	}
 
 	public double getX() {
@@ -159,15 +129,16 @@ public class Invader extends Object implements EntityMethod {
 		return y;
 	}
 
-	public void setAngle(float angle) {
-		this.angle = angle;
+	public float getDamage() {
+		return damage;
 	}
 
-	public void setX(double x) {
-		this.x = x;
+	public double getcenterx() {
+		return x + damage / 2;
 	}
 
-	public void setY(double y) {
-		this.y = y;
+	public double getcentery() {
+		return y + damage / 2;
 	}
+
 }

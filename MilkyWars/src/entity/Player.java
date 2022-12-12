@@ -3,15 +3,19 @@ package entity;
 import static util.Constant.PlayerConstants.GetSpriteAmount;
 import static util.Constant.PlayerConstants.*;
 import static util.TestMethod.*;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
+
+import main.Game;
 import util.Load;
 
-public class Player implements EntityMethod {
+public class Player extends Object implements EntityMethod {
 
 	private float x, y;
 	private int width, height;
@@ -20,13 +24,28 @@ public class Player implements EntityMethod {
 	private int playerAction = STOP;
 	private boolean moving = false;
 	private boolean left, right, up, stop;
-	private float maxPlayerSpeed = 0.4f;
+	private float maxPlayerSpeed = 0.5f;
 	private float speed = 0f;
 	private float angle = 0f;
 	private Area playerShape;
 	private int[][] levelData;
 
+	private BufferedImage healthBarImg;
+	private int ImgHealthBarWidth = (int) (192 * Game.SCALE);
+	private int ImgHealthBarHeight = (int) (28 * Game.SCALE);
+	private int ImgHealthBarX = (int) (10 * Game.SCALE);
+	private int ImgHealthBarY = (int) (10 * Game.SCALE);
+	private int healthBarWidth = (int) (155 * Game.SCALE);
+	private int healthBarHeight = (int) (24 * Game.SCALE);
+	private int healthBarX = (int) (35 * Game.SCALE);
+	private int healthBarY = (int) (2 * Game.SCALE);
+	private int maxHealth = 100;
+	private int currentHealth = 30;
+	private int healthWidth = healthBarWidth;
+	private boolean alive = true;
+
 	public Player(float x, float y, int width, int height) {
+		super(new Health(100, 100));
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -55,6 +74,14 @@ public class Player implements EntityMethod {
 		// check hitbox
 //		g2.setColor(Color.green);
 //		g2.draw(getHitbox());
+		hpRender(g2, getHitbox(), x);
+//		drawHealth(g2);
+	}
+
+	private void drawHealth(Graphics2D g2) {
+		g2.drawImage(healthBarImg, ImgHealthBarX, ImgHealthBarY, ImgHealthBarWidth, ImgHealthBarHeight, null);
+		g2.setColor(new Color(196, 12, 12));
+		g2.fillRect(healthBarX + ImgHealthBarX, healthBarY + ImgHealthBarY, healthWidth, healthBarHeight);
 	}
 
 	public void updateAnimationTick() {
@@ -85,6 +112,8 @@ public class Player implements EntityMethod {
 				animations[j][i] = img.getSubimage(i * 64, j * 68, 64, 68);
 			}
 		}
+
+		healthBarImg = Load.GetSprite(Load.HEALTH_BAR);
 
 	}
 
@@ -153,7 +182,7 @@ public class Player implements EntityMethod {
 		float rotateSpeed;
 
 		if (stop) {
-			rotateSpeed = 0.1f;
+			rotateSpeed = 0.2f;
 			if (left && !right) {
 				angle -= rotateSpeed;
 			} else if (right && !left) {
@@ -165,7 +194,7 @@ public class Player implements EntityMethod {
 			moving = true;
 			stop = false;
 			speedUp();
-			rotateSpeed = 0.2f;
+			rotateSpeed = 0.3f;
 			if (left && !right) {
 				angle -= rotateSpeed;
 			} else if (right && !left) {
@@ -180,6 +209,21 @@ public class Player implements EntityMethod {
 			moving = false;
 		}
 
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+
+	public void resetPlayer() {
+		alive = true;
+		resetHp();
+		angle = 0;
+		speed = 0;
 	}
 
 	public void loadLevelData(int[][] levelData) {

@@ -19,6 +19,8 @@ public class Load {
 	public static final String PLAY_BACKGROUND1 = "blue_background.png";
 	public static final String ENEMY1_SPRITE = "enemy1_sprite.png";
 	public static final String METEOR_SPRITE = "meteor_sprite.png";
+	public static final String LASER_SPRITE = "laser.png";
+	public static final String HEALTH_BAR = "health_bar.png";
 
 	public static BufferedImage GetSprite(String fileName) {
 		BufferedImage img = null;

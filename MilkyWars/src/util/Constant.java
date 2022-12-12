@@ -48,4 +48,17 @@ public class Constant {
 			}
 		}
 	}
+
+	public static class LaserConstants {
+		public static final int SPEED = 0;
+
+		public static int GetSpriteAmount(int laserState) {
+			switch (laserState) {
+			case SPEED:
+				return 1;
+			default:
+				return 1;
+			}
+		}
+	}
 }
