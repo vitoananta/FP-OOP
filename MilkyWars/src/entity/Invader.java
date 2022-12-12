@@ -3,21 +3,13 @@ package entity;
 import static util.Constant.PlayerConstants.GetSpriteAmount;
 import static util.Constant.PlayerConstants.SPEED;
 import static util.Constant.PlayerConstants.STOP;
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.Random;
-
-import gamestate.Play;
-import main.Game;
 import util.Load;
 
 public class Invader extends Object implements EntityMethod {
@@ -31,7 +23,6 @@ public class Invader extends Object implements EntityMethod {
 	private double x, y;
 	private final float speed = 0.5f;
 	private float angle = 0f;
-	private Play play;
 
 	public Invader() {
 		super(new Health(50, 50));
@@ -54,10 +45,6 @@ public class Invader extends Object implements EntityMethod {
 		tran.rotate(Math.toRadians(angle + 90), 32, 35);
 		g2.drawImage(animations[enemyState][aniIndex], tran, null);
 		g2.setTransform(olTransform);
-//
-//		double hpY = (getHitbox().getBounds().getY() - 15);
-//		g2.setColor(Color.white);
-//		g2.fill(new Rectangle2D.Double(x, hpY, 64, 3));
 		hpRender(g2, getHitbox(), x);
 
 		// check hitbox

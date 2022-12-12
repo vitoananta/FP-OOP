@@ -2,7 +2,6 @@ package level;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
 import main.Game;
 import util.Load;
 

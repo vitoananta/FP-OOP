@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,10 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import javax.swing.JOptionPane;
-
-import entity.Health;
 import entity.Invader;
 import entity.Laser;
 import entity.Meteor;
@@ -32,11 +28,8 @@ import util.Load;
 
 public class Play extends State implements Statemethod {
 	private Player player;
-	private Invader invader;
 	private List<Invader> invaders;
-	private Meteor meteor;
 	private List<Meteor> meteors;
-	private Laser laser;
 	private List<Laser> lasers;
 	private int shotTime;
 	private LevelController levelController;
@@ -108,7 +101,7 @@ public class Play extends State implements Statemethod {
 					try {
 						TimeUnit.SECONDS.sleep(timeInSecond);
 					} catch (InterruptedException e) {
-						System.out.println("Cannot delay the enemy, please contact the programmer");
+						JOptionPane.showMessageDialog(null, "Cannot delay the enemy! Please close the game immedietly.");
 						e.printStackTrace();
 					}
 					System.out.println("The enemy delay is: " + timeInSecond);
@@ -416,10 +409,11 @@ public class Play extends State implements Statemethod {
 	}
 
 	private String getHighScore() throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("highscore.txt"));
-		String line;
-		while ((line = reader.readLine()) != null) {
-			highScore = line;
+		try (BufferedReader reader = new BufferedReader(new FileReader("highscore.txt"))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				highScore = line;
+			}
 		}
 		return highScore;
 	}

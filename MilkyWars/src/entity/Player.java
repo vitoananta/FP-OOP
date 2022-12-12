@@ -3,17 +3,13 @@ package entity;
 import static util.Constant.PlayerConstants.GetSpriteAmount;
 import static util.Constant.PlayerConstants.*;
 import static util.TestMethod.*;
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
-
 import gamestate.Play;
-import main.Game;
 import util.Load;
 
 public class Player extends Object implements EntityMethod {

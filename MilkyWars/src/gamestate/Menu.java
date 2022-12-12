@@ -1,12 +1,9 @@
 package gamestate;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.Iterator;
-
 import main.Game;
 import ui.MenuButton;
 import util.Load;

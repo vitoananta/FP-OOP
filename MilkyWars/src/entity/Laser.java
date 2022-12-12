@@ -10,8 +10,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferedImage;
-
-import gamestate.Play;
 import util.Load;
 
 public class Laser implements EntityMethod {
