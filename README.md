@@ -70,8 +70,16 @@ Cara untuk mengatasi masalah tersebut adalah hentikan program tersebut, lalu jal
 Tips agar kita dapat tahu dengan pasti bahwa program dapat menerima input dengan
  keyboard adalah dengan cara menekan 'ENTER' saat ingin memulai game pada menu game.
 
-	
-  
+
+
+DEMO
+
+Video demo (on youtube)
+https://youtu.be/EJ2g9W4TkW0 
+ 
+ 
+ 
+ 
 CONTRIBUTING
 
 Game logics		: https://www.kaaringaming.com/tutorials by Kaarin Gaming
