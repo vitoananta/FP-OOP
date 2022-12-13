@@ -124,7 +124,7 @@ Tips agar kita dapat tahu dengan pasti bahwa program dapat menerima input dengan
 
 DEMO
 
-Video demo (on youtube)
+Video demo (On youtube) (Gameplay at the end of video)
 https://youtu.be/EJ2g9W4TkW0 
  
  
