@@ -44,20 +44,43 @@ OOP aspects that personally applied for the FP:
 	
 - Polymorphism		: 	printDetailEnemy()(gamestate package: Play class: spawnInvader & spawnMeteor methods) (Play.java)
 	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/gamestate/Play.java#L296
-	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Invader.java#L161-L163
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/entity/Invader.java#L161-L163
 	
 	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/gamestate/Play.java#L322
 	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Meteor.java#L153-L155
 
 - ArrayList		: 	ArrayList enemys & meteors (Play: initEnemies())
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L93-L95
+
 - Exception Handling	: 	Delaying enemies(gamestate package: Play class: initEnemies())
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L104-L109
+
 - GUI			: 	Swing: JOptionePane (gamestate package: Play class: updateHighscore()
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L106-L108
+	
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L255-L256
+
 				AWT: Path2D (entity package: Ivander & Meteor class: initHitbox()) (Invader.java & Metor.java)
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/entity/Player.java#L97-L115
+	
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/entity/Meteor.java#L86-L96
+				
 - Interface		: 	EntityMethod (entity pacakge: Enitiy interface) (EntityMethod.Java)
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/entity/EntityMethod.java#L6-L21
+
 - Abstract Class		:	Bullet (entity pacakge: Bullet abstrac class) (Bullet.java)
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/entity/Bullet.java#L3-L14
+
 - Generics		: 	Saving usernames (gamestate package: ListOfUsername class) (ListOfusername.java)
-- Collection		: 	ArrayList for invaders, meteors and lasers (gamestate package: Play class) (Play.java)
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/ListOfUsername.java#L3-L13
+
+- Collection		: 	List for invaders, meteors and lasers (gamestate package: Play class) (Play.java)
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L32-L34
+
 - Input Output		:	Highscore (gamestate package: Play class: updateHighscore() & getHighScore()) (Play.java)
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L423-L434
+	
+	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L254-L284
 
 RUN THIS PROJECT
 
@@ -87,7 +110,7 @@ Pada permainan (setalah klik button PLAY):
 
 
 
-ERRORS
+ERROR
 
 Terdapat bug dalam project ini yaitu window focus tidak selalu aktif ketika program
  baru saja dijalankan (program tidak bisa menerima input keyboard).
@@ -114,7 +137,8 @@ CONTRIBUTING
 - Draw shapes		: https://www.youtube.com/watch?v=zCiMlbu1-aQ&t=2090s by choobtorials
 - JOptionPane		: https://www.youtube.com/watch?v=BuW7y21FcYI by Bro Code
 - Generics		: https://www.youtube.com/watch?v=K1iu1kXkVoA by Coding with John
-- Asset			: https://www.kenney.nl/assets/space-shooter-extension by Kenney
+- Asset			: 1. https://www.kenney.nl/assets/space-shooter-extension by Kenney
+			  2. https://www.kaaringaming.com/tutorials by Kaarin Gaming
 
 
 
