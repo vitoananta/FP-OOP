@@ -22,11 +22,33 @@ OOP aspects that personally applied for the FP:
 	https://github.com/vitoananta/FP-OOP/blob/5518f2035793b05dddef67b64e58bb4570752d17/MilkyWars/src/gamestate/Play.java#L240-L243
 
 - Constructor		: 	Health class (entity package) (Health.java)
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Health.java#L5-L11
+
 - Overloading		: 	spawnInvader() method (gamesate package: Play class) (Play.java)
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/gamestate/Play.java#L289-L307
+
 - Overriding		: 	initHitbox() (entitiy package: Invader class & Meteor class) (Invader.java & Meteor.Java)
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Invader.java#L27-L31
+	
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Meteor.java#L27-L31
+	
 - Encapsulation		: 	Getters & Setters (entitiy package: Invader class & Meteor class) (Invader.java & Meteor.Java)
-- Inheritance		: 	super class: Object class (entitiy package: Object.java) -> sub class: Invader, Meteor (entitiy package: Invader.java & Meteor.Java) 
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Meteor.java#L129-L151
+
+- Inheritance		: 	super class: Object class (entitiy package: Object.java) -> sub class: Invader, Meteor (entitiy package: Invader.java & Meteor.Java)
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Object.java#L8-L14
+	
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Invader.java#L15
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Meteor.java#L15
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Player.java#L15
+	
 - Polymorphism		: 	printDetailEnemy()(gamestate package: Play class: spawnInvader & spawnMeteor methods) (Play.java)
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/gamestate/Play.java#L296
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Invader.java#L161-L163
+	
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/gamestate/Play.java#L322
+	https://github.com/vitoananta/FP-OOP/blob/ad2e5e477dd26fde92ea4a7669a6ea19b3a9b21e/MilkyWars/src/entity/Meteor.java#L153-L155
+
 - ArrayList		: 	ArrayList enemys & meteors (Play: initEnemies())
 - Exception Handling	: 	Delaying enemies(gamestate package: Play class: initEnemies())
 - GUI			: 	Swing: JOptionePane (gamestate package: Play class: updateHighscore()
