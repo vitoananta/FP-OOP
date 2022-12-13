@@ -17,9 +17,9 @@ OOP ASPECT
 OOP aspects that personally applied for the FP:
 
 - Casting/Conversion	: 	Casting double to float (gamesate package: Play class: CollidePlayerInvade/Meteor() method) (Play.java)
-- https://github.com/vitoananta/FP-OOP/blob/5518f2035793b05dddef67b64e58bb4570752d17/MilkyWars/src/gamestate/Play.java#L222-L225
+	https://github.com/vitoananta/FP-OOP/blob/5518f2035793b05dddef67b64e58bb4570752d17/MilkyWars/src/gamestate/Play.java#L222-L225
 
-- https://github.com/vitoananta/FP-OOP/blob/5518f2035793b05dddef67b64e58bb4570752d17/MilkyWars/src/gamestate/Play.java#L240-L243
+	https://github.com/vitoananta/FP-OOP/blob/5518f2035793b05dddef67b64e58bb4570752d17/MilkyWars/src/gamestate/Play.java#L240-L243
 
 - Constructor		: 	Health class (entity package) (Health.java)
 - Overloading		: 	spawnInvader() method (gamesate package: Play class) (Play.java)
