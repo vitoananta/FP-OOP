@@ -59,8 +59,8 @@ OOP aspects that personally applied for the FP:
 	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L106-L108
 	
 	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L255-L256
-
-				AWT: Path2D (entity package: Ivander & Meteor class: initHitbox()) (Invader.java & Metor.java)
+	
+	AWT: Path2D (entity package: Ivander & Meteor class: initHitbox()) (Invader.java & Metor.java)
 				
 	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/entity/Player.java#L97-L115
 	
