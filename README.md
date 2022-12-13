@@ -13,7 +13,25 @@ Dalam Final Project (FP) ini saya memustukan untuk membuat “Milky Wars”,
 Tujuan FP ini adalah untuk melatih skill saya dalam pemrograman berorientasi objek
  dengan melibatkan segala aspek yang telah saya pelajari dari berbagai sumber.
 
+OOP ASPECT
+OOP aspects that personally applied for the FP:
 
+Casting/Conversion	: 	Casting double to float (gamesate package: Play class: CollidePlayerInvade/Meteor() method) (Play.java)
+Constructor		: 	Health class (entity package) (Health.java)
+Overloading		: 	spawnInvader() method (gamesate package: Play class) (Play.java)
+Overriding		: 	initHitbox() (entitiy package: Invader class & Meteor class) (Invader.java & Meteor.Java)
+Encapsulation		: 	Getters & Setters (entitiy package: Invader class & Meteor class) (Invader.java & Meteor.Java)
+Inheritance		: 	super class: Object class (entitiy package: Object.java) -> sub class: Invader, Meteor (entitiy package: Invader.java & Meteor.Java) 
+Polymorphism		: 	printDetailEnemy()(gamestate package: Play class: spawnInvader & spawnMeteor methods) (Play.java)
+ArrayList		: 	ArrayList enemys & meteors (Play: initEnemies())
+Exception Handling	: 	Delaying enemies(gamestate package: Play class: initEnemies())
+GUI			: 	Swing: JOptionePane (gamestate package: Play class: updateHighscore()
+				AWT: Path2D (entity package: Ivander & Meteor class: initHitbox()) (Invader.java & Metor.java)
+Interface		: 	EntityMethod (entity pacakge: Enitiy interface) (EntityMethod.Java)
+Abstract Class		:	Bullet (entity pacakge: Bullet abstrac class) (Bullet.java)
+Generics		: 	Saving usernames (gamestate package: ListOfUsername class) (ListOfusername.java)
+Collection		: 	ArrayList for invaders, meteors and lasers (gamestate package: Play class) (Play.java)
+Input Output		:	Highscore (gamestate package: Play class: updateHighscore() & getHighScore()) (Play.java)
 
 RUN THIS PROJECT
 
