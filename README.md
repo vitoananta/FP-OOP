@@ -2,7 +2,7 @@
 
 
 
-ABOUT
+## ABOUT
 
 Dalam Final Project (FP) ini saya memustukan untuk membuat “Milky Wars”,
  yaitu sebuah permainan berbasis highscore. User/player akan mengontrol
@@ -13,7 +13,7 @@ Dalam Final Project (FP) ini saya memustukan untuk membuat “Milky Wars”,
 Tujuan FP ini adalah untuk melatih skill saya dalam pemrograman berorientasi objek
  dengan melibatkan segala aspek yang telah saya pelajari dari berbagai sumber.
 
-OOP ASPECT
+## OOP ASPECT
 OOP aspects that personally applied for the FP:
 
 - Casting/Conversion	: 	Casting double to float (gamesate package: Play class: CollidePlayerInvade/Meteor() method) (Play.java)
@@ -83,7 +83,7 @@ OOP aspects that personally applied for the FP:
 	
 	https://github.com/vitoananta/FP-OOP/blob/0f66336d306b82ce7bf162fff861302a5b2dfebc/MilkyWars/src/gamestate/Play.java#L254-L284
 
-RUN THIS PROJECT
+## RUN THIS PROJECT
 
 Untuk menjalankan project ini, diperlukan hal-hal sebagai berikut:
 - IDE bebas (disarankan untuk memakai IDE yang terikat dengan bahasa pemrograman Java
@@ -94,7 +94,7 @@ Untuk menjalankan project ini, diperlukan hal-hal sebagai berikut:
 
 
 
-GAME
+## GAME
 
 Berikut beberapa panduan dalam bermain:
 Pada menu:
@@ -111,7 +111,7 @@ Pada permainan (setalah klik button PLAY):
 
 
 
-ERROR
+## ERROR
 
 Terdapat bug dalam project ini yaitu window focus tidak selalu aktif ketika program
  baru saja dijalankan (program tidak bisa menerima input keyboard).
@@ -122,7 +122,7 @@ Tips agar kita dapat tahu dengan pasti bahwa program dapat menerima input dengan
 
 
 
-DEMO
+## DEMO
 
 Video demo (On youtube) (Gameplay at the end of video)
 https://youtu.be/EJ2g9W4TkW0 
@@ -130,7 +130,7 @@ https://youtu.be/EJ2g9W4TkW0
  
  
  
-CONTRIBUTING
+## CONTRIBUTING
 
 - Game logics		: https://www.kaaringaming.com/tutorials by Kaarin Gaming
 - Input output file	: https://www.youtube.com/watch?v=lHFlAYaNfdo by Alex Lee
@@ -144,7 +144,7 @@ CONTRIBUTING
 
 
 
-SCREENSHOTS
+## SCREENSHOTS
 
 Menu
 ![menu](https://user-images.githubusercontent.com/115033527/207221920-d881d0cb-650e-45d1-8535-591f9cf21ef5.png)
@@ -157,6 +157,6 @@ Game Over with beated highscore
 
 
 
-POSTER
+## POSTER
 
 ![Poster FP PBO](https://user-images.githubusercontent.com/115033527/207306821-b996bdf6-2462-499b-8a04-109ecfb27cb2.png)
