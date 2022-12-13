@@ -1,5 +1,7 @@
 package gamestate;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -22,8 +24,8 @@ public class Menu extends State implements Statemethod {
 	}
 
 	private void loadButton() {
-		button[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, Gamestate.PLAY);
-		button[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
+		button[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (180 * Game.SCALE), 0, Gamestate.PLAY);
+		button[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (260 * Game.SCALE), 2, Gamestate.QUIT);
 	}
 
 	@Override
@@ -39,6 +41,9 @@ public class Menu extends State implements Statemethod {
 		for (MenuButton menuButton : button) {
 			menuButton.draw(g);
 		}
+		g.setColor(Color.white);
+		g.setFont(new Font("Verdana", Font.BOLD, 50));
+		g.drawString("M I L K Y   W A R S", Game.GAME_WIDTH / 2 - 255, 150);
 	}
 
 	@Override

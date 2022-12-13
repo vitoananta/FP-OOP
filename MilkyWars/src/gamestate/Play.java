@@ -1,6 +1,7 @@
 package gamestate;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -81,8 +82,9 @@ public class Play extends State implements Statemethod {
 		player.render(g);
 		renderEnemies(g);
 		g.setColor(Color.white);
-		g.drawString("Score: " + score, 3, 27);
-		g.drawString("Highscore is " + highScore, 3, 47);
+		g.setFont(new Font("Verdana", Font.PLAIN, 25));
+		g.drawString("Score: " + score, 10, 27);
+		g.drawString("Highscore is " + highScore, 10, 57);
 		if (!player.isAlive()) {
 			gameOverScene.draw(g);
 		}
