@@ -425,10 +425,12 @@ public class Play extends State implements Statemethod {
 			while ((line = reader.readLine()) != null) {
 				highScore = line;
 			}
+			reader.close();
 			stringGen.add(line);
 		} catch (Exception e) {
 			highScore = "Username:0";
 		}
+		
 		return highScore;
 	}
 }
