@@ -88,6 +88,7 @@ CONTRIBUTING
 - Draw shapes		: https://www.youtube.com/watch?v=zCiMlbu1-aQ&t=2090s by choobtorials
 - JOptionPane		: https://www.youtube.com/watch?v=BuW7y21FcYI by Bro Code
 - Generics		: https://www.youtube.com/watch?v=K1iu1kXkVoA by Coding with John
+- Asset			: https://www.kenney.nl/assets/space-shooter-extension by Kenney
 
 
 
