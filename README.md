@@ -82,12 +82,12 @@ https://youtu.be/EJ2g9W4TkW0
  
 CONTRIBUTING
 
-Game logics		: https://www.kaaringaming.com/tutorials by Kaarin Gaming
-Input output file	: https://www.youtube.com/watch?v=lHFlAYaNfdo by Alex Lee
-Rotating image	: https://www.youtube.com/watch?v=OqQE3Z87uuU by Coding Explained
-Draw shapes		: https://www.youtube.com/watch?v=zCiMlbu1-aQ&t=2090s by choobtorials
-JOptionPane		: https://www.youtube.com/watch?v=BuW7y21FcYI by Bro Code
-Generics		: https://www.youtube.com/watch?v=K1iu1kXkVoA by Coding with John
+- Game logics		: https://www.kaaringaming.com/tutorials by Kaarin Gaming
+- Input output file	: https://www.youtube.com/watch?v=lHFlAYaNfdo by Alex Lee
+- Rotating image	: https://www.youtube.com/watch?v=OqQE3Z87uuU by Coding Explained
+- Draw shapes		: https://www.youtube.com/watch?v=zCiMlbu1-aQ&t=2090s by choobtorials
+- JOptionPane		: https://www.youtube.com/watch?v=BuW7y21FcYI by Bro Code
+- Generics		: https://www.youtube.com/watch?v=K1iu1kXkVoA by Coding with John
 
 
 
