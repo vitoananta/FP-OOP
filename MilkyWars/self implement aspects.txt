@@ -1,0 +1,17 @@
+OOP aspects that personally applied for the FP:
+
+Casting/Conversion	: 	Casting double to float (play: collidePlayer)
+Constructor			: 	Health class
+Overloading			: 	spawnInvader() (Play)
+Overriding			: 	initHitbox() (Invader & Meteor)
+Encapsulation		: 	Getters & Setters (Invader and Meteor)
+Inheritance			: 	super class: Object -> sub class: Invader, Meteor
+Polymorphism		: 	printDetailEnemy()(Play: spawn methods)
+ArrayList			: 	ArrayList enemys & meteors (Play: initEnemies())
+Exception Handling	: 	Delaying enemies(Play: initEnemies())
+GUI				: 	Swing: JOptionePane and AWT: Path2D (Invader and Meteor)
+Interface			: 	EntityMethod (entity)
+Abstract Class		:	Bullet (entitity)
+Generics			: 	ListOfUsername (gamestate)
+Collection			: 	List for invaders, meteors and lasers (Play)
+Input Output		:	Highscore (Play)
