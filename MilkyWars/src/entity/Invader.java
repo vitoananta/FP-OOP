@@ -159,6 +159,6 @@ public class Invader extends Object implements EntityMethod {
 	}
 	
 	public String printEnemyDetail() {
-		return ("This enemy is meteor! you need to destroy this ASAP.");
+		return ("This enemy is invader! you need to destroy this ASAP.");
 	}
 }
