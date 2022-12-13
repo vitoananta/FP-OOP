@@ -155,3 +155,8 @@ Play
 Game Over with beated highscore
 ![gameover](https://user-images.githubusercontent.com/115033527/207221978-ce4bece8-c411-4013-ab27-4933f3cc275d.png)
 
+
+
+POSTER
+
+![Poster FP PBO](https://user-images.githubusercontent.com/115033527/207306821-b996bdf6-2462-499b-8a04-109ecfb27cb2.png)
