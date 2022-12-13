@@ -264,18 +264,18 @@ public class Play extends State implements Statemethod {
 			}
 
 			FileWriter writeFile = null;
-			BufferedWriter writerFile = null;
+			BufferedWriter writer = null;
 
 			try {
 				writeFile = new FileWriter(highscoreFile);
-				writerFile = new BufferedWriter(writeFile);
-				writerFile.write(this.highScore);
+				writer = new BufferedWriter(writeFile);
+				writer.write(this.highScore);
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
 				try {
-					if (writerFile != null) {
-						writerFile.close();
+					if (writer != null) {
+						writer.close();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
